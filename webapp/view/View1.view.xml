@@ -72,8 +72,9 @@
 
 									<ToolbarSpacer id="_IDGenToolbarSpacer" />
 									<core:ExtensionPoint name="ExtClienteTabPanel"/>
-                  <Button id="_IDGenButton4" text="Ordenar"  press="onSortItems" />
-									<Button id="_IDGenButton" text="Leitura"  press="onClienteRead" />
+                  <Button id="_IDGenButton4" text="[Ordenar]"  press="onSortItems" />
+									<Button id="_IDGenButton" text="[Ler MATNR da linha marcada no Backend]"  press="onClienteReadSelected" />
+                  <Button id="_IDGenButton5" text="[Ler Todos c/ Bind Aggregation]"  press="onClienteReadAllBindAggregation" />
 									<Button id="_IDGenButton1" icon="sap-icon://delete" press="onClienteDelete" />
 									<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarCliente" />
 									<SearchField
