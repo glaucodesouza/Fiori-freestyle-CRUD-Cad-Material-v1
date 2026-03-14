@@ -46,6 +46,8 @@ sap.ui.define([
             },
             /* ------------------------------------------------------- */
             /* Ler Matnr da linha marcada, buscar no backend e filtrar */
+            /* (APENAS PRA ESTUDO)                                     */
+            /* NÃO É BOM NEM PRÁTICO                                   */
             /* ------------------------------------------------------- */
             onClienteReadSelected: function(){
                 let oModel = this.getView().getModel();
@@ -93,6 +95,11 @@ sap.ui.define([
                   });
                 }
             },
+            /* ------------------------------------------------------- */
+            /* Ler com Bind Aggregation                                */
+            /* (APENAS PRA ESTUDO)                                     */
+            /* NÃO É USUAL NEM PRÁTICO                                 */
+            /* ------------------------------------------------------- */
             onClienteReadAllBindAggregation: function(){
                 let oModel = this.getView().getModel();
                 let oTable = this.byId('table');
