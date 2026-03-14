@@ -35,10 +35,26 @@
 							delete="onClienteDelete"
 							items="{
 								path: '/MaterialSet',
-								sorter: {
-									path: 'Bukrs',
-									descending: true
-								}
+                sorter: [
+                      {
+                        path: 'Bukrs',
+                        descending: true
+                      },
+                      {
+                        path: 'Matnr',
+                        descending: false
+                      }
+                ],
+                filters: [{
+                  path: 'Menge',
+                  operator: 'GT',
+                  value1: '10.000'
+                },{
+                  path: 'Meins',
+                  operator: 'NE',
+                  value1: 'UN'
+                }
+                ]
 							}"
 							noDataText="{worklistView>/tableNoDataText}"
 							busyIndicatorDelay="{worklistView>/tableBusyDelay}"
@@ -56,6 +72,7 @@
 
 									<ToolbarSpacer id="_IDGenToolbarSpacer" />
 									<core:ExtensionPoint name="ExtClienteTabPanel"/>
+                  <Button id="_IDGenButton4" text="Ordenar"  press="onSortItems" />
 									<Button id="_IDGenButton" text="Leitura"  press="onClienteRead" />
 									<Button id="_IDGenButton1" icon="sap-icon://delete" press="onClienteDelete" />
 									<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarCliente" />
