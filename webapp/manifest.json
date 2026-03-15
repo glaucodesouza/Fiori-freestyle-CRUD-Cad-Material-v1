@@ -99,7 +99,12 @@
           "target": [
             "TargetView1"
           ]
-        }
+        },
+				{
+					"name": "object",
+					"pattern": "MaterialSet/{Bukrs}/{Matnr}",
+					"target": ["object"]
+				}
       ],
       "targets": {
         "TargetView1": {
@@ -108,7 +113,16 @@
           "clearControlAggregation": false,
           "viewId": "View1",
           "viewName": "View1"
-        }
+        },
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 2,
+					"title": "Object Page",
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false
+				}
       }
     },
     "rootView": {

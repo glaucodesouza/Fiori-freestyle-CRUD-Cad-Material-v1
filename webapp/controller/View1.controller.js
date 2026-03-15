@@ -63,36 +63,36 @@ sap.ui.define([
                     return;
                 } else {
 
-                  let aFilters = [];
+                    let aFilters = [];
 
-                  aSelectedItems.forEach(function(oItem){
-                      let oData = oItem.getBindingContext().getObject();
-                      aFilters.push(
-                          new Filter("Bukrs", FilterOperator.EQ, oData.Bukrs)
-                      );
-                      aFilters.push(
-                          new Filter("Matnr", FilterOperator.EQ, oData.Matnr)
-                      );
-                  });
+                    aSelectedItems.forEach(function(oItem){
+                        let oData = oItem.getBindingContext().getObject();
+                        aFilters.push(
+                            new Filter("Bukrs", FilterOperator.EQ, oData.Bukrs)
+                        );
+                        aFilters.push(
+                            new Filter("Matnr", FilterOperator.EQ, oData.Matnr)
+                        );
+                    });
 
-                  oModel.read("/MaterialSet", {
-                      filters: aFilters,
-                      success: function(oData){
-                          let aFilters = [];
-                          aFilters.push(
-                            new Filter("Bukrs", FilterOperator.EQ, oData.results[0].Bukrs)
-                          );
-                          aFilters.push(
-                            new Filter("Matnr", FilterOperator.EQ, oData.results[0].Matnr)
-                          );
-                          let oItems = oTable.getBinding('items');
-                          oItems.filter(aFilters);
-                          console.log(oData);
-                      },
-                      error: function(oError){
-                          console.log(oError);
-                      }
-                  });
+                    oModel.read("/MaterialSet", {
+                        filters: aFilters,
+                        success: function(oData){
+                            let aFilters = [];
+                            aFilters.push(
+                                new Filter("Bukrs", FilterOperator.EQ, oData.results[0].Bukrs)
+                            );
+                            aFilters.push(
+                                new Filter("Matnr", FilterOperator.EQ, oData.results[0].Matnr)
+                            );
+                            let oItems = oTable.getBinding('items');
+                            oItems.filter(aFilters);
+                            console.log(oData);
+                        },
+                        error: function(oError){
+                            console.log(oError);
+                        }
+                    });
                 }
             },
             /* ------------------------------------------------------- */
@@ -115,7 +115,16 @@ sap.ui.define([
                     ],
                     filter: aFilters
                 });
+            },
 
-            }
+            onLinePress: function (oEvent) {
+                // The source is the list item that got pressed
+                let oItem = oEvent.getSource();
+
+                this.getOwnerComponent().getRouter().navTo("object", {
+                    Bukrs: oItem.getBindingContext().getProperty("Bukrs"),
+                    Matnr: oItem.getBindingContext().getProperty("Matnr")
+                });
+		    },
         });
     });
