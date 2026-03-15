@@ -51,18 +51,20 @@
                     />
 
 					<Label text="Material" />
-					<Input  
-						value="{Matnr}" 
+					<Text  
+						text="{Matnr}" 
                     />
 
 					<Label text="Descrição" />
 					<Input  
-						value="{Maktx}" 
+						value="{Maktx}"
+                        editable="{objectView>/edit}"
                     />	
 					
 					<Label text="Quantidade" />
 					<Input  
 						value="{Menge}"
+                        editable="{objectView>/edit}"
 						showValueHelp="true"
 						valueHelpRequest=".onValueHelpRequest"
                     />
@@ -70,44 +72,12 @@
 					<Label text="UM" />
 					<Input  
 						value="{Meins}"
+                        editable="{objectView>/edit}"
 						showValueHelp="true"
 						valueHelpRequest=".onValueHelpRequest"
                     />
 				</f:SimpleForm>					
 
-		<List
-			growing="true"
-			growingScrollToLoad="true"
-			growingThreshold="20"
-			headerText="{i18n>vendaListCliente}"
-			class="sapUiResponsiveMargin"
-			width="auto"
-			items="{
-			path : 'vendas',
-			parameters:{
-				expand: 'cliente'
-			},
-			sorter: {
-                path: 'Bukrs',
-                descending: true
-			}
-		}">
-		<items>
-		<ObjectListItem
-			title="{Descricao}"
-			number="{ValorLiquido}"
-			numberState="{=	${ValorLiquido} > 500 ? 'Error' : 'Success' }"
-			>
-
-			<attributes>
-			<ObjectAttribute text="{IDVenda}" />
-			<ObjectAttribute 
-			text="{DataCriacao}" />
-			<ObjectAttribute text="{cliente/Email}" />
-			</attributes>
-		</ObjectListItem>
-		</items>
-	</List>
 
 
 	</l:VerticalLayout>

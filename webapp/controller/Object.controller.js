@@ -12,39 +12,26 @@ sap.ui.define([
 
 	return Controller.extend("cadmatv1.controller.Object", {
 
-		/* =========================================================== */
-		/* lifecycle methods                                           */
-		/* =========================================================== */
-
 		/**
 		 * Called when the worklist controller is instantiated.
 		 * @public
 		 */
 		onInit: function () {
-			// // Model used to manipulate control states. The chosen values make sure,
-			// // detail page is busy indication immediately so there is no break in
-			// // between the busy indication for loading the view's meta data
-			// var iOriginalBusyDelay,
-			// 	oViewModel = new JSONModel({
-			// 		busy: true,
-			// 		delay: 0
-			// 	});
 
-			// this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
+			// Set edit mode
+            let oViewModel = new JSONModel({
+					busy: false,
+					delay: 0,
+                    edit: false
+				});
 
-			// // Store original busy indicator delay, so it can be restored later on
-			// iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
-			// this.setModel(oViewModel, "objectView");
-			// this.getOwnerComponent().getModel().metadataLoaded().then(function () {
-			// 	// Restore original busy indicator delay for the object view
-			// 	oViewModel.setProperty("/delay", iOriginalBusyDelay);
-			// }
-			// );
+            let oRouter = this.getOwnerComponent().getRouter();
+			oRouter.getRoute("object").attachPatternMatched(this._onObjectMatched, this);
+
+            // Set edit mode
+            this.getView().setModel(oViewModel, "objectView");
 		},
 
-		/* =========================================================== */
-		/* event handlers                                              */
-		/* =========================================================== */
 		onGravar: function (oEvent) {
 			// var m = this.getView().getModel();
 
@@ -78,6 +65,16 @@ sap.ui.define([
 
 		onCancelar: function (oEvent) {
 
+			// Set edit mode
+            let oViewModel = new JSONModel({
+					busy: false,
+					delay: 0,
+                    edit: false
+				});
+
+            // Set edit mode
+            this.getView().setModel(oViewModel, "objectView");
+
 			// var m = this.getView().getModel();
 
 			// if (!m.hasPendingChanges()) {
@@ -104,10 +101,6 @@ sap.ui.define([
 			}
 		},
 
-		/* =========================================================== */
-		/* internal methods                                            */
-		/* =========================================================== */
-
 		/**
 		 * Binds the view to the object path.
 		 * @function
@@ -115,13 +108,22 @@ sap.ui.define([
 		 * @private
 		 */
 		_onObjectMatched: function (oEvent) {
-			// var sObjectId = oEvent.getParameter("arguments").objectId;
-			// this.getModel().metadataLoaded().then(function () {
-			// 	var sObjectPath = this.getModel().createKey("ClienteSet", {
-			// 		ClienteID: sObjectId
-			// 	});
-			// 	this._bindView("/" + sObjectPath);
-			// }.bind(this));
+            let sBukrs = oEvent.getParameter("arguments").Bukrs;
+			let sMatnr = oEvent.getParameter("arguments").Matnr;
+            let oView = this.getView();
+
+            //Binding da página com o material
+            oView.bindElement({
+                path: "/MaterialSet(Bukrs='" + sBukrs + "',Matnr='" + sMatnr + "')",
+                events: {
+                    dataRequested: function () {
+                        oView.setBusy(true);
+                    },
+                    dataReceived: function () {
+                        oView.setBusy(false);
+                    }
+                }
+            });
 		},
 
 		/**
@@ -182,8 +184,17 @@ sap.ui.define([
 		},
 
 		onPressAlterar: function (oEvent) {
+			// Set edit mode
+            let oViewModel = new JSONModel({
+					busy: false,
+					delay: 0,
+                    edit: true
+				});
 
-			// var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZMONITORVENDAS_SRV/");
+            // Set edit mode
+            this.getView().setModel(oViewModel, "objectView");
+			
+            // var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZMONITORVENDAS_SRV/");
 
 			// //coletar valores do elemento da tela usando metodos get de propriedades
 			// var clienteid = '0000000178';
