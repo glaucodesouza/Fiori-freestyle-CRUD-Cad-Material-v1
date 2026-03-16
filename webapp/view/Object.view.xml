@@ -15,19 +15,19 @@
 		busyIndicatorDelay="{objectView>/delay}">
 
 		<semantic:titleHeading>
-			<Title
+			<Title id="_IDGenTitle1"
 				text="{Bukrs}"
 				level="H2"/>
 		</semantic:titleHeading>
 
 		<semantic:headerContent>
-			<ObjectNumber
+			<ObjectNumber id="_IDGenObjectNumber1"
 				unit="{Matnr}"
 			/>
 		</semantic:headerContent>
 
-		<l:VerticalLayout width="100%">
-				<f:SimpleForm
+		<l:VerticalLayout id="_IDGenVerticalLayout" width="100%">
+				<f:SimpleForm id="_IDGenSimpleForm"
 					editable="true"
 					layout="ResponsiveGridLayout"
 					labelSpanXL="3"
@@ -45,32 +45,37 @@
 					singleContainerFullSize="false"
 					>
 					
-                    <Label text="Empresa" />
+                    <Label id="_IDGenLabel" text="Empresa" />
 					<Text 
+						id='txtBukrs' 
 						text="{Bukrs}" 
                     />
 
-					<Label text="Material" />
+					<Label id="_IDGenLabel1" text="Material" />
 					<Text  
+						id='txtMatnr'
 						text="{Matnr}" 
                     />
 
-					<Label text="Descrição" />
+					<Label id="_IDGenLabel2" text="Descrição" />
 					<Input  
+						id='txtMaktx'
 						value="{Maktx}"
                         editable="{objectView>/edit}"
                     />	
 					
-					<Label text="Quantidade" />
+					<Label id="_IDGenLabel3" text="Quantidade" />
 					<Input  
+						id='txtMenge'
 						value="{Menge}"
                         editable="{objectView>/edit}"
 						showValueHelp="true"
 						valueHelpRequest=".onValueHelpRequest"
                     />
 
-					<Label text="UM" />
-					<Input  
+					<Label id="_IDGenLabel4" text="UM" />
+					<Input
+						id='txtMeins'
 						value="{Meins}"
                         editable="{objectView>/edit}"
 						showValueHelp="true"
@@ -84,9 +89,9 @@
 
 	<!-- Custom Footer Content-->
 	<semantic:footerCustomActions>
-		<Button type="Accept" text="Alterar" press="onPressAlterar" />
-		<Button type="Accept" text="Gravar" press="onGravar" />
-		<Button type="Reject" text="Cancelar" press="onCancelar" />
+		<Button id="_IDGenButton6" type="Accept" text="Editar" press="onPressAlterar" />
+		<Button id="_IDGenButton7" type="Accept" text="Gravar" press="onGravar" />
+		<Button id="_IDGenButton8" type="Reject" text="Cancelar" press="onCancelar" />
 	</semantic:footerCustomActions>	
 
 	</semantic:SemanticPage>

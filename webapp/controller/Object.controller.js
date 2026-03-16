@@ -2,12 +2,12 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"sap/m/MessageToast",
+	"sap/m/MessageBox"
 ], 
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,JSONModel, History, MessageToast) {
+    function (Controller,JSONModel, History, MessageBox) {
 	"use strict";
 
 	return Controller.extend("cadmatv1.controller.Object", {
@@ -30,37 +30,6 @@ sap.ui.define([
 
             // Set edit mode
             this.getView().setModel(oViewModel, "objectView");
-		},
-
-		onGravar: function (oEvent) {
-			// var m = this.getView().getModel();
-
-			// if (!m.hasPendingChanges()) {
-			// 	MessageToast.show("Sem mudanças para gravar.");
-			// 	return;
-			// }
-
-			// this.getView().setBusy(true);
-
-			// m.submitChanges({
-			// 	success: function (oData, response) {
-
-			// 		MessageToast.show("Mudanças realizadas.");
-			// 		this.getView().setBusy(false);
-			// 		var mensagem = JSON.parse(resposta.headers["sap-message"]);
-
-			// 	}.bind(this),
-
-			// 	error: function (oError) {
-
-			// 		MessageToast.show("Aconteceu um erro.");
-			// 		console.error(oError);
-			// 		this.getView().setBusy(false);
-			// 		var erro;
-			// 		erro = JSON.parse(oError.responseText);
-			// 	},
-			// });
-
 		},
 
 		onCancelar: function (oEvent) {
@@ -261,6 +230,77 @@ sap.ui.define([
 
 		},
 
+		onGravar: function (oEvent) {
+
+            let oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZMONITORVENDAS_SRV/");
+
+			//coletar valores do elemento da tela usando metodos get de propriedades
+			let clienteid = '0000000178';
+			let sBukrs = this.byId('txtBukrs').getText();
+			let sMatnr = this.byId('txtMatnr').getText();
+			let sMaktx = this.byId('txtMaktx').getValue();
+			let sMenge = this.byId('txtMenge').getValue();
+			let sMeins = this.byId('txtMeins').getValue();
+
+			let sPath = "/MaterialSet('" + clienteid + "')";
+
+			let oDadosGravar = {
+				Bukrs: sBukrs,
+				Matnr: sMatnr,
+				Maktx: sMaktx,
+				Menge: sMenge,
+				Meins: sMeins
+			};
+
+			oModel.update(sPath, oDadosGravar, {
+				success: function (oDadosRetorno, resposta) {
+
+					debugger
+					MessageBox.success('Dados modificados com sucesso');
+					// var mensagem = JSON.parse(resposta.headers["sap-message"]);
+
+				}.bind(this),
+
+				error: function (oError) {
+
+					debugger
+					MessageBox.error(`Erro ao gravar ` + oError.message);
+					// var erro;
+					// erro = JSON.parse(oError.responseText);
+
+				}.bind(this),
+
+			});
+
+			// var m = this.getView().getModel();
+
+			// if (!m.hasPendingChanges()) {
+			// 	MessageToast.show("Sem mudanças para gravar.");
+			// 	return;
+			// }
+
+			// this.getView().setBusy(true);
+
+			// m.submitChanges({
+			// 	success: function (oData, response) {
+
+			// 		MessageToast.show("Mudanças realizadas.");
+			// 		this.getView().setBusy(false);
+			// 		var mensagem = JSON.parse(resposta.headers["sap-message"]);
+
+			// 	}.bind(this),
+
+			// 	error: function (oError) {
+
+			// 		MessageToast.show("Aconteceu um erro.");
+			// 		console.error(oError);
+			// 		this.getView().setBusy(false);
+			// 		var erro;
+			// 		erro = JSON.parse(oError.responseText);
+			// 	},
+			// });
+
+		}
 
 	});
 
