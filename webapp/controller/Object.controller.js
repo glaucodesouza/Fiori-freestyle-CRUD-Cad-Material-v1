@@ -232,17 +232,16 @@ sap.ui.define([
 
 		onGravar: function (oEvent) {
 
-            let oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZMONITORVENDAS_SRV/");
+            let oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZGCAD_MAT270_SRV/");
 
 			//coletar valores do elemento da tela usando metodos get de propriedades
-			let clienteid = '0000000178';
 			let sBukrs = this.byId('txtBukrs').getText();
 			let sMatnr = this.byId('txtMatnr').getText();
 			let sMaktx = this.byId('txtMaktx').getValue();
 			let sMenge = this.byId('txtMenge').getValue();
 			let sMeins = this.byId('txtMeins').getValue();
 
-			let sPath = "/MaterialSet('" + clienteid + "')";
+			let sPath = `/MaterialSet(Bukrs='` + sBukrs + `',Matnr='` + sMatnr + `')`;
 
 			let oDadosGravar = {
 				Bukrs: sBukrs,
@@ -254,22 +253,11 @@ sap.ui.define([
 
 			oModel.update(sPath, oDadosGravar, {
 				success: function (oDadosRetorno, resposta) {
-
-					debugger
 					MessageBox.success('Dados modificados com sucesso');
-					// var mensagem = JSON.parse(resposta.headers["sap-message"]);
-
 				}.bind(this),
-
 				error: function (oError) {
-
-					debugger
 					MessageBox.error(`Erro ao gravar ` + oError.message);
-					// var erro;
-					// erro = JSON.parse(oError.responseText);
-
 				}.bind(this),
-
 			});
 
 			// var m = this.getView().getModel();
