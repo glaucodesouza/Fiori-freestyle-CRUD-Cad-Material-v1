@@ -5,9 +5,10 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "cadmatv1/model/models"
+        "cadmatv1/model/models",
+        "sap/ui/model/json/JSONModel",
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models, JSONModel) {
         "use strict";
 
         return UIComponent.extend("cadmatv1.Component", {
@@ -29,6 +30,19 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                //1) NAVIGATION Set actions
+                let oDataGlobal = new sap.ui.model.json.JSONModel({
+                    busy: false,
+                    delay: 0,
+                    businessAction: "show", // "show", "edit" ou "create"
+                    edit: false
+                });
+
+                // this.setModel(oObjectViewModel, "objectViewModelGlobal");
+                // let oModelGlobal = new JSONModel(oDataGlobal);
+                // this.setModel(oModelGlobal, "objectViewModelGlobal");
+                this.setModel(oDataGlobal, "objectViewModelGlobal");
             }
         });
     }

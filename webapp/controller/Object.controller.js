@@ -17,19 +17,46 @@ sap.ui.define([
 		 * @public
 		 */
 		onInit: function () {
+			// let oObjectViewModelLocal = this.getOwnerComponent()
+			// 								.getModel("objectViewModelGlobal");
+
+			// Set local edit mode
+            // let oObjectViewModelLocal = new JSONModel({
+			// 		busy: false,
+			// 		delay: 0,
+            //         edit: true
+			// 	});
 
 			// Set edit mode
-            let oViewModel = new JSONModel({
-					busy: false,
-					delay: 0,
-                    edit: false
-				});
+            // let oViewModel = new JSONModel({
+			// 		busy: false,
+			// 		delay: 0,
+            //         edit: false
+			// 	});
+
+            // // Set edit mode
+            // this.getView().setModel(oObjectViewModelLocal, "objectViewModelLocal");
 
             let oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
-            // Set edit mode
-            this.getView().setModel(oViewModel, "objectView");
+			const oObjectViewModelLocal = this.getOwnerComponent().getModel("objectViewModelGlobal");
+			this.getView().setModel(oObjectViewModelLocal, "objectViewModelLocal");
+			
+		},
+
+		onBeforeRendering:  function () {
+			// let bEdit = this.getView().getModel("objectViewModelLocal").getProperty("/edit");
+			
+			// // Set edit mode
+            // let oViewModelLocal = new JSONModel({
+            //         busy: false,
+            //         delay: 0,
+            //         businessAction: "show", // "show", "edit" ou "create"
+            //         edit: bEdit
+            //     });
+			
+			// this.getView().setModel(oViewModelLocal, "objectViewModelLocal");
 		},
 
 		onCancelar: function (oEvent) {
@@ -87,6 +114,7 @@ sap.ui.define([
                 events: {
                     dataRequested: function () {
                         oView.setBusy(true);
+
                     },
                     dataReceived: function () {
                         oView.setBusy(false);
@@ -153,16 +181,44 @@ sap.ui.define([
 		},
 
 		onPressAlterar: function (oEvent) {
-			// Set edit mode
-            let oViewModel = new JSONModel({
-					busy: false,
-					delay: 0,
-                    edit: true
-				});
-
-            // Set edit mode
-            this.getView().setModel(oViewModel, "objectView");
 			
+			let oDataGlobal = new sap.ui.model.json.JSONModel({
+				busy: false,
+				delay: 0,
+				businessAction: "show", // "show", "edit" ou "create"
+				edit: true
+			});
+			this.getOwnerComponent().setModel(oDataGlobal,"objectViewModelGlobal");
+			this.getView().setModel(oDataGlobal, "objectViewModelLocal");
+
+			// let sRecipient = this.getView().getModel().getProperty("/edit");
+		    // let oObjectViewModel = this.getOwnerComponent().getModel("objectViewModel");
+    		// let sAction = oViewModel.getProperty("/action");
+			
+			// Controller.getOwnerComponent()
+			// .getModel("oObjectViewModelGlobal")
+			// .setProperty("/businessAction", "edit");
+
+			// this.getOwnerComponent()
+			// .getModel("oObjectViewModelGlobal")
+			// .setProperty("/edit", true);
+
+			// Set local edit mode
+			// let oObjectViewModelLocal = this.getOwnerComponent().getModel("oObjectViewModelGlobal");
+            
+            // Set edit mode
+            // this.getView().setModel(oObjectViewModelLocal, "objectViewModelLocal");
+			
+			// Set edit mode
+            // let oViewModelLocal = new JSONModel({
+            //         busy: false,
+            //         delay: 0,
+            //         businessAction: "show", // "show", "edit" ou "create"
+            //         edit: false
+            //     });
+
+			// this.getView().setModel(oViewModelLocal, "objectViewModelLocal");
+
             // var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZMONITORVENDAS_SRV/");
 
 			// //coletar valores do elemento da tela usando metodos get de propriedades

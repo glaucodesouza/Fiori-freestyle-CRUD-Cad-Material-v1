@@ -61,14 +61,14 @@
 					<Input  
 						id='txtMaktx'
 						value="{Maktx}"
-                        editable="{objectView>/edit}"
+                        editable="{objectViewModelLocal>/edit}"
                     />	
 					
 					<Label id="_IDGenLabel3" text="Quantidade" />
 					<Input  
 						id='txtMenge'
 						value="{Menge}"
-                        editable="{objectView>/edit}"
+                        editable="{objectViewModelLocal>/edit}"
 						showValueHelp="true"
 						valueHelpRequest=".onValueHelpRequest"
                     />
@@ -77,7 +77,7 @@
 					<Input
 						id='txtMeins'
 						value="{Meins}"
-                        editable="{objectView>/edit}"
+                        editable="{objectViewModelLocal>/edit}"
 						showValueHelp="true"
 						valueHelpRequest=".onValueHelpRequest"
                     />
