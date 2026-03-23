@@ -135,5 +135,17 @@ sap.ui.define([
                     Matnr: oItem.getBindingContext().getProperty("Matnr")
                 });
 		    },
+            onCriarClientePress: function (oEvent) {
+                //2) NAVIGATION Set actions
+                // Set mode show to Object page view
+                // Pois a Navegação normal com clique no item wdo workitem,
+                // deve setar o action com "show" (p/ Object Page).
+                this.getOwnerComponent()
+                .getModel("objectViewModelGlobal")
+                .setProperty("/action", "edit");
+
+                // NAVIGATE: 
+                this.getOwnerComponent().getRouter().navTo("create", {});
+            }
         });
     });

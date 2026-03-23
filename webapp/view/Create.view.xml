@@ -1,0 +1,85 @@
+<mvc:View
+	controllerName="cadmatv1.controller.Create"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="createPage"
+		showFooter="true"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{createView>/busy}"
+		busyIndicatorDelay="{createView>/delay}">
+
+		<l:VerticalLayout id="_IDGenVerticalLayout2" width="100%">
+            <f:SimpleForm id="_IDGenSimpleForm2" 
+                
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+                >
+                
+                <Label id="_IDGenLabel20" text="Empresa" />
+                <Input 
+                    id='txtBukrs2' 
+                    value="{createView>/Bukrs}" 
+                />
+
+                <Label id="_IDGenLabel21" text="Material" />
+                <Input  
+                    id='txtMatnr2'
+                    value="{createView>/Matnr}" 
+                />
+
+                <Label id="_IDGenLabel22" text="Descrição" />
+                <Input  
+                    id='txtMaktx2'
+                    value="{createView>/Maktx}"
+                    editable="{objectViewModelLocal>/edit}"
+                />	
+                
+                <Label id="_IDGenLabel23" text="Quantidade" />
+                <Input  
+                    id='txtMenge2'
+                    value="{createView>/Menge}"
+                    editable="{objectViewModelLocal>/edit}"
+                    showValueHelp="true"
+                    valueHelpRequest=".onValueHelpRequest"
+                />
+
+                <Label id="_IDGenLabel24" text="UM" />
+                <Input
+                    id='txtMeins2'
+                    value="{createView>/Meins}"
+                    editable="{objectViewModelLocal>/edit}"
+                    showValueHelp="true"
+                    valueHelpRequest=".onValueHelpRequest"
+                />
+            </f:SimpleForm>					
+
+	    </l:VerticalLayout>
+
+	<!-- Custom Footer Content-->
+	<semantic:footerCustomActions>
+		<Button id="_IDGenButton27" type="Accept" text="Gravar" press="onGravar" />
+		<Button id="_IDGenButton28" type="Reject" text="Cancelar" press="onCancelar" />
+	</semantic:footerCustomActions>	
+
+	</semantic:SemanticPage>
+
+</mvc:View>

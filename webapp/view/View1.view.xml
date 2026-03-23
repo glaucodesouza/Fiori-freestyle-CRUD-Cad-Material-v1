@@ -76,7 +76,7 @@
 									<Button id="_IDGenButton" text="[Ler MATNR da linha marcada no Backend]"  press="onClienteReadSelected" />
                   					<Button id="_IDGenButton5" text="[Ler Todos c/ Bind Aggregation]"  press="onClienteReadAllBindAggregation" />
 									<Button id="_IDGenButton1" icon="sap-icon://delete" press="onClienteDelete" />
-									<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarCliente" />
+									<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarClientePress" />
 									<SearchField
 										id="searchField"
 										tooltip="{i18n>worklistSearchTooltip}"
