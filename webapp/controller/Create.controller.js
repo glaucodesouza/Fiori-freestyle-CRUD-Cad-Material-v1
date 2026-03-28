@@ -89,6 +89,34 @@ sap.ui.define([
 					sap.m.MessageToast.show(`Erro ao gravar ` + oError.message);
 				}.bind(this),
 			});
+		},
+
+		onValueHelpRequest: function (oEvent) {
+			var oInput = oEvent.getSource();
+
+			if (!this._oUnitDialog) {
+				this._oUnitDialog = new sap.m.SelectDialog({
+					title: "Selecionar Unidade de Medida",
+					items: {
+						path: "/UnidadeDeMedidaSHSet", // sua entidade OData
+						template: new sap.m.StandardListItem({
+							title: "{Msehi}",
+							description: "{Msehl}"
+						})
+					},
+					confirm: function (oEvent) {
+						var oSelectedItem = oEvent.getParameter("selectedItem");
+						if (oSelectedItem) {
+							oInput.setValue(oSelectedItem.getTitle());
+						}
+					},
+					cancel: function () {}
+				});
+
+				this.getView().addDependent(this._oUnitDialog);
+			}
+
+			this._oUnitDialog.open();
 		}
 
 	});

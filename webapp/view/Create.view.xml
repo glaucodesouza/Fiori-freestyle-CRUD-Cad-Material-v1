@@ -58,8 +58,6 @@
                     id='txtMengeCreate'
                     value="{createView>/Menge}"
                     editable="{objectViewModelLocal>/edit}"
-                    showValueHelp="true"
-                    valueHelpRequest=".onValueHelpRequest"
                 />
 
                 <Label id="_IDGenLabel24" text="UM" />
@@ -68,7 +66,7 @@
                     value="{createView>/Meins}"
                     editable="{objectViewModelLocal>/edit}"
                     showValueHelp="true"
-                    valueHelpRequest=".onValueHelpRequest"
+                    valueHelpRequest="onValueHelpRequest"
                 />
             </f:SimpleForm>					
 

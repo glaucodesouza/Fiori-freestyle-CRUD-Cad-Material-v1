@@ -258,7 +258,7 @@ sap.ui.define([
 
 		},
 
-		onValueHelpRequest: function (oEvent) {
+		// onValueHelpRequest: function (oEvent) {
 			
 			// 	var oView = this.getView();
 
@@ -277,7 +277,7 @@ sap.ui.define([
 				
 			// 	oDialog.open();
 			// });
-		},
+		// },
 
 		closeUFDialog:function(){
 			// this.byId("inpUf").setValue( this.byId("inpNewUf").getValue() );
@@ -344,6 +344,34 @@ sap.ui.define([
 			// 	},
 			// });
 
+		},
+
+		onValueHelpRequestMeins: function (oEvent) {
+			var oInput = oEvent.getSource();
+
+			if (!this._oUnitDialog2) {
+				this._oUnitDialog2 = new sap.m.SelectDialog({
+					title: "Selecionar Unidade de Medida",
+					items: {
+						path: "/UnidadeDeMedidaSHSet", // sua entidade OData
+						template: new sap.m.StandardListItem({
+							title: "{Msehi}",
+							description: "{Msehl}"
+						})
+					},
+					confirm: function (oEvent) {
+						var oSelectedItem = oEvent.getParameter("selectedItem");
+						if (oSelectedItem) {
+							oInput.setValue(oSelectedItem.getTitle());
+						}
+					},
+					cancel: function () {}
+				});
+
+				this.getView().addDependent(this._oUnitDialog2);
+			}
+
+			this._oUnitDialog2.open();
 		}
 
 	});
