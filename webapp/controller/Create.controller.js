@@ -1,13 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/routing/History",
-	"sap/m/MessageBox"
+	"sap/ui/core/routing/History"
 ], 
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,JSONModel, History, MessageBox) {
+    function (Controller,JSONModel, History) {
 	"use strict";
 
 	return Controller.extend("cadmatv1.controller.Create", {
@@ -62,33 +61,34 @@ sap.ui.define([
 
 		onGravar: function (oEvent) {
 
+			let oModel = this.getView().getModel();
             // let oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZGCAD_MAT270_SRV/");
 
-			// //coletar valores do elemento da tela usando metodos get de propriedades
-			// let sBukrs = this.byId('txtBukrs').getText();
-			// let sMatnr = this.byId('txtMatnr').getText();
-			// let sMaktx = this.byId('txtMaktx').getValue();
-			// let sMenge = this.byId('txtMenge').getValue();
-			// let sMeins = this.byId('txtMeins').getValue();
+			//coletar valores do elemento da tela usando metodos get de propriedades
+			let sBukrs = this.byId('txtBukrsCreate').getValue();
+			let sMatnr = this.byId('txtMatnrCreate').getValue();
+			let sMaktx = this.byId('txtMaktxCreate').getValue();
+			let sMenge = parseFloat(this.byId('txtMengeCreate').getValue().replaceAll(',', '.')).toPrecision(3);
+			let sMeins = this.byId('txtMeinsCreate').getValue();
 
-			// let sPath = `/MaterialSet(Bukrs='` + sBukrs + `',Matnr='` + sMatnr + `')`;
+			let sPath = `/MaterialSet`;
 
-			// let oDadosGravar = {
-			// 	Bukrs: sBukrs,
-			// 	Matnr: sMatnr,
-			// 	Maktx: sMaktx,
-			// 	Menge: sMenge,
-			// 	Meins: sMeins
-			// };
+			let oDadosGravar = {
+				Bukrs: sBukrs,
+				Matnr: sMatnr,
+				Maktx: sMaktx,
+				Menge: sMenge,
+				Meins: sMeins
+			};
 
-			// oModel.update(sPath, oDadosGravar, {
-			// 	success: function (oDadosRetorno, resposta) {
-			// 		MessageBox.success('Dados modificados com sucesso');
-			// 	}.bind(this),
-			// 	error: function (oError) {
-			// 		MessageBox.error(`Erro ao gravar ` + oError.message);
-			// 	}.bind(this),
-			// });
+			oModel.create(sPath, oDadosGravar, {
+				success: function (oDadosRetorno, resposta) {
+					sap.m.MessageToast.show('Material criado com sucesso');
+				}.bind(this),
+				error: function (oError) {
+					sap.m.MessageToast.show(`Erro ao gravar ` + oError.message);
+				}.bind(this),
+			});
 		}
 
 	});

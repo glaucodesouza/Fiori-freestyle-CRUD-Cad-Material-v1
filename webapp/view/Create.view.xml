@@ -36,26 +36,26 @@
                 
                 <Label id="_IDGenLabel20" text="Empresa" />
                 <Input 
-                    id='txtBukrs2' 
+                    id='txtBukrsCreate' 
                     value="{createView>/Bukrs}" 
                 />
 
                 <Label id="_IDGenLabel21" text="Material" />
                 <Input  
-                    id='txtMatnr2'
+                    id='txtMatnrCreate'
                     value="{createView>/Matnr}" 
                 />
 
                 <Label id="_IDGenLabel22" text="Descrição" />
                 <Input  
-                    id='txtMaktx2'
+                    id='txtMaktxCreate'
                     value="{createView>/Maktx}"
                     editable="{objectViewModelLocal>/edit}"
                 />	
                 
                 <Label id="_IDGenLabel23" text="Quantidade" />
                 <Input  
-                    id='txtMenge2'
+                    id='txtMengeCreate'
                     value="{createView>/Menge}"
                     editable="{objectViewModelLocal>/edit}"
                     showValueHelp="true"
@@ -64,7 +64,7 @@
 
                 <Label id="_IDGenLabel24" text="UM" />
                 <Input
-                    id='txtMeins2'
+                    id='txtMeinsCreate'
                     value="{createView>/Meins}"
                     editable="{objectViewModelLocal>/edit}"
                     showValueHelp="true"
