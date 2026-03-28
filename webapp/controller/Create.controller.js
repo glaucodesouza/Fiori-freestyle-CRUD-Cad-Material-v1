@@ -17,6 +17,14 @@ sap.ui.define([
 		 */
 		onInit: function () {
 
+			this.limparTodosCamposTela();
+			// //limpar valores
+			// this.byId('txtBukrsCreate').setValue('');
+			// this.byId('txtMatnrCreate').setValue('');
+			// this.byId('txtMaktxCreate').setValue('');
+			// this.byId('txtMengeCreate').setValue('');
+			// this.byId('txtMeinsCreate').setValue('');
+			
             // let oRouter = this.getOwnerComponent().getRouter();
 			// oRouter.getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
@@ -83,6 +91,7 @@ sap.ui.define([
 
 			oModel.create(sPath, oDadosGravar, {
 				success: function (oDadosRetorno, resposta) {
+					this.limparTodosCamposTela();
 					sap.m.MessageToast.show('Material criado com sucesso');
 				}.bind(this),
 				error: function (oError) {
@@ -92,7 +101,7 @@ sap.ui.define([
 		},
 
 		onValueHelpRequest: function (oEvent) {
-			var oInput = oEvent.getSource();
+			let oInput = oEvent.getSource();
 
 			if (!this._oUnitDialog) {
 				this._oUnitDialog = new sap.m.SelectDialog({
@@ -105,7 +114,7 @@ sap.ui.define([
 						})
 					},
 					confirm: function (oEvent) {
-						var oSelectedItem = oEvent.getParameter("selectedItem");
+						let oSelectedItem = oEvent.getParameter("selectedItem");
 						if (oSelectedItem) {
 							oInput.setValue(oSelectedItem.getTitle());
 						}
@@ -117,6 +126,15 @@ sap.ui.define([
 			}
 
 			this._oUnitDialog.open();
+		},
+
+		limparTodosCamposTela: function () {
+			//limpar valores
+			this.byId('txtBukrsCreate').setValue('');
+			this.byId('txtMatnrCreate').setValue('');
+			this.byId('txtMaktxCreate').setValue('');
+			this.byId('txtMengeCreate').setValue('');
+			this.byId('txtMeinsCreate').setValue('');
 		}
 
 	});

@@ -71,6 +71,18 @@ sap.ui.define([
             // Set edit mode
             this.getView().setModel(oViewModel, "objectView");
 
+			let oDataGlobal = new sap.ui.model.json.JSONModel({
+				busy: false,
+				delay: 0,
+				businessAction: "show", // "show", "edit" ou "create"
+				edit: false
+			});
+			this.getOwnerComponent().setModel(oDataGlobal,"objectViewModelGlobal");
+			this.getView().setModel(oDataGlobal, "objectViewModelLocal");
+
+			// const oObjectViewModelLocal = this.getOwnerComponent().getModel("objectViewModelGlobal");
+			// this.getView().setModel(oObjectViewModelLocal, "objectViewModelLocal");
+
 			// var m = this.getView().getModel();
 
 			// if (!m.hasPendingChanges()) {
@@ -347,7 +359,7 @@ sap.ui.define([
 		},
 
 		onValueHelpRequestMeins: function (oEvent) {
-			var oInput = oEvent.getSource();
+			let oInput = oEvent.getSource();
 
 			if (!this._oUnitDialog2) {
 				this._oUnitDialog2 = new sap.m.SelectDialog({
@@ -360,7 +372,7 @@ sap.ui.define([
 						})
 					},
 					confirm: function (oEvent) {
-						var oSelectedItem = oEvent.getParameter("selectedItem");
+						let oSelectedItem = oEvent.getParameter("selectedItem");
 						if (oSelectedItem) {
 							oInput.setValue(oSelectedItem.getTitle());
 						}
