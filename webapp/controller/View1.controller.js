@@ -29,6 +29,7 @@ sap.ui.define([
                 oItems.sort(oSorter);
                 
             },
+            
             onSearchCustom: function(oEvent){
                 let aTableSearchState = [];
                 let sQuery = oEvent.getParameter('query');
@@ -135,6 +136,7 @@ sap.ui.define([
                     Matnr: oItem.getBindingContext().getProperty("Matnr")
                 });
 		    },
+
             onCriarClientePress: function (oEvent) {
                 //2) NAVIGATION Set actions
                 // Set mode show to Object page view
@@ -146,6 +148,37 @@ sap.ui.define([
 
                 // NAVIGATE: 
                 this.getOwnerComponent().getRouter().navTo("create", {});
+            },
+
+            onDeletarClientePress: function(){
+
+                let oModel = this.getView().getModel();
+                let oTable = this.byId("table");
+                let aSelectedItems = oTable.getSelectedItems();
+                let sPath = ``;
+
+                if (!aSelectedItems || aSelectedItems.length == 0) {
+                    sap.m.MessageToast.show('Nenhuma linha selecionada!');
+                    return;
+                } else if (!!aSelectedItems && aSelectedItems.length > 1) {
+                    sap.m.MessageToast.show('Selecionar apenas uma linha!');
+                    return;
+                } else {
+
+                    aSelectedItems.forEach(function(oItem){
+                        let oData = oItem.getBindingContext().getObject();
+                        sPath = `/MaterialSet(Bukrs=${oData.Bukrs},Matnr=${oData.Matnr})`;
+                    });
+
+                    oModel.delete(sPath, {
+                        success: function(oData){
+                            sap.m.MessageToast.show('Material Deletado com sucesso!');
+                        },
+                        error: function(oError){
+                            sap.m.MessageToast.show('Erro ao deletar Material!');
+                        }
+                    });
+                }
             }
         });
     });

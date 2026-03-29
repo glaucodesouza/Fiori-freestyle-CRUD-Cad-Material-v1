@@ -38,7 +38,14 @@ sap.ui.define([
 		},
 
 		onCancelar: function (oEvent) {
-
+			history.go(-1);
+            // let sPreviousHash = History.getInstance().getPreviousHash();
+            // if (sPreviousHash !== undefined) {
+            //     // eslint-disable-next-line sap-no-history-manipulation
+            //     history.go(-1);
+            // } else {
+            //     this.getRouter().navTo("TargetView1", {}, true);
+            // }
 			// // Set edit mode
             // let oViewModel = new JSONModel({
 			// 		busy: false,

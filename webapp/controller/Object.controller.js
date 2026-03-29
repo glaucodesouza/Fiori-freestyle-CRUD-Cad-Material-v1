@@ -80,6 +80,14 @@ sap.ui.define([
 			this.getOwnerComponent().setModel(oDataGlobal,"objectViewModelGlobal");
 			this.getView().setModel(oDataGlobal, "objectViewModelLocal");
 
+			history.go(-1);
+            // let sPreviousHash = History.getInstance().getPreviousHash();
+            // if (sPreviousHash !== undefined) {
+            //     // eslint-disable-next-line sap-no-history-manipulation
+            //     history.go(-1);
+            // } else {
+            //     this.getRouter().navTo("TargetView1", {}, true);
+            // }
 			// const oObjectViewModelLocal = this.getOwnerComponent().getModel("objectViewModelGlobal");
 			// this.getView().setModel(oObjectViewModelLocal, "objectViewModelLocal");
 

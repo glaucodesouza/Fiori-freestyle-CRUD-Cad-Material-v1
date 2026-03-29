@@ -77,6 +77,7 @@
                   					<Button id="_IDGenButton5" text="[Ler Todos c/ Bind Aggregation]"  press="onClienteReadAllBindAggregation" />
 									<Button id="_IDGenButton1" icon="sap-icon://delete" press="onClienteDelete" />
 									<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarClientePress" />
+									<Button id="_IDGenButton9" text="Deletar" type="Emphasized" press="onDeletarClientePress" />
 									<SearchField
 										id="searchField"
 										tooltip="{i18n>worklistSearchTooltip}"
