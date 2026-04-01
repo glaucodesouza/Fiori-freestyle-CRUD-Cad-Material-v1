@@ -100,6 +100,7 @@ sap.ui.define([
 				success: function (oDadosRetorno, resposta) {
 					this.limparTodosCamposTela();
 					sap.m.MessageToast.show('Material criado com sucesso');
+					history.go(-1);
 				}.bind(this),
 				error: function (oError) {
 					sap.m.MessageToast.show(`Erro ao gravar ` + oError.message);

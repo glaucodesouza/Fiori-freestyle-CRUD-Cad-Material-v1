@@ -167,10 +167,10 @@ sap.ui.define([
 
                     aSelectedItems.forEach(function(oItem){
                         let oData = oItem.getBindingContext().getObject();
-                        sPath = `/MaterialSet(Bukrs=${oData.Bukrs},Matnr=${oData.Matnr})`;
+                        sPath = `/MaterialSet(Bukrs='${oData.Bukrs}',Matnr='${oData.Matnr}')`;
                     });
 
-                    oModel.delete(sPath, {
+                    oModel.remove(sPath, {
                         success: function(oData){
                             sap.m.MessageToast.show('Material Deletado com sucesso!');
                         },
