@@ -29,14 +29,16 @@ Cadastro de Materiais V1
     npm start
 ```
 
-- It is also possible to run the application using mock data that reflects the OData Service URL supplied during application generation.  In order to run the application with Mock Data, run the following from the generated app root folder:
+### APP IMAGES
 
-```
-    npm run start-mock
-```
 
-#### Pre-requisites:
+![alt text](image.png)
 
-1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
+![alt text](image-1.png)
 
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
 
