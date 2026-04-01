@@ -329,7 +329,16 @@ sap.ui.define([
 
 			oModel.update(sPath, oDadosGravar, {
 				success: function (oDadosRetorno, resposta) {
+					let oDataGlobal = new sap.ui.model.json.JSONModel({
+						busy: false,
+						delay: 0,
+						businessAction: "show", // "show", "edit" ou "create"
+						edit: false
+					});
+					this.getOwnerComponent().setModel(oDataGlobal,"objectViewModelGlobal");
+					this.getView().setModel(oDataGlobal, "objectViewModelLocal");
 					MessageBox.success('Dados modificados com sucesso');
+					history.go(-1);
 				}.bind(this),
 				error: function (oError) {
 					MessageBox.error(`Erro ao gravar ` + oError.message);
