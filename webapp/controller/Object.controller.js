@@ -337,6 +337,10 @@ sap.ui.define([
 					});
 					this.getOwnerComponent().setModel(oDataGlobal,"objectViewModelGlobal");
 					this.getView().setModel(oDataGlobal, "objectViewModelLocal");
+
+					// Força o refresh de todas as agregações ligadas a este modelo OData
+					this.getView().getModel().refresh(true);
+
 					MessageBox.success('Dados modificados com sucesso');
 					history.go(-1);
 				}.bind(this),

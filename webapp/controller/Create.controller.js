@@ -99,6 +99,10 @@ sap.ui.define([
 			oModel.create(sPath, oDadosGravar, {
 				success: function (oDadosRetorno, resposta) {
 					this.limparTodosCamposTela();
+
+					// Força o refresh de todas as agregações ligadas a este modelo OData
+					this.getView().getModel().refresh(true);
+
 					sap.m.MessageToast.show('Material criado com sucesso');
 					history.go(-1);
 				}.bind(this),
