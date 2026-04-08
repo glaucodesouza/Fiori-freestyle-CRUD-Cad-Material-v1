@@ -31,7 +31,7 @@ sap.ui.define([
             },
             
             onSearchCustom: function(oEvent){
-                
+
                 // 1. Obter referências dos campos de input pelo ID definido no XML
                 let sBukrs = this.byId("inputBukrs").getValue();
                 let sMatnr = this.byId("inputMatnr").getValue();
@@ -48,11 +48,18 @@ sap.ui.define([
                     aFilters.push(new Filter("Matnr", FilterOperator.Contains, sMatnr));
                 }
 
-                // 4. Aplicar os filtros na tabela
+                // 4. Se o evento veio do SearchField (SE O CAMPO DE BUSCA À DIREITA NA TOOLBAR DA TABLE), 
+                // você também pode capturar esse valor se desejar um filtro global:
+                let sQuery = oEvent.getParameter("query");
+                if (sQuery && sQuery.length > 0) {
+                    aFilters.push(new Filter("Matnr", FilterOperator.Contains, sQuery));
+                }
+
+                // 5. Aplicar os filtros na tabela
                 let oTable = this.byId("table");
                 let oBinding = oTable.getBinding("items");
 
-                // 5. Se aFilters estiver vazio, ele limpará os filtros e mostrará tudo
+                // 6. Se aFilters estiver vazio, ele limpará os filtros e mostrará tudo
                 oBinding.filter(aFilters);
 
                 // let aTableSearchState = [];
