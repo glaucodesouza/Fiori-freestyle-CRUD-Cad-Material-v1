@@ -2,162 +2,179 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="false"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-	xmlns:semantic="sap.f.semantic">
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar">
     <!--<Page id="page" title="{i18n>title}">
         <content />
     </Page>-->
-	<semantic:SemanticPage
+	
+    <f:DynamicPage id="dynamicPage">
+
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1" >
+                <f:heading>
+                    <Title id="_IDGenTitle" text="Gestão de Materiais (ZGCAD_MAT270)"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="_IDGenDynamicPageHeader" >
+                <f:content>
+
+                <fb:FilterBar id="filterBar" header="Filtros" search=".onSearchCustom" showRestoreButton="true">
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem id="_IDGenFilterGroupItem" 
+                            name="Bukrs" 
+                            label="Empresa" 
+                            groupName="Group1" 
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <Input id="inputBukrs" placeholder="Digite a empresa..." maxLength="4" />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem id="_IDGenFilterGroupItem1" 
+                            name="Matnr" 
+                            label="Material" 
+                            groupName="Group1" 
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <Input id="inputMatnr" placeholder="Digite o código do material..." />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+		<f:content>
+		<IconTabBar id="idIconTabBarFiori2" upperCase="true" expanded="{device>/isNoPhone}"
+			selectedKey="key1"
+			class="sapUiResponsiveContentPadding">
+			<items>
+				<IconTabFilter id="_IDGenIconTabFilter1" text="Clientes" key="key1">
+				<content>    
 		
-		showFooter="{= ${messagez>/}.length > 0 }"
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
-
-		<semantic:titleHeading>
-			<Title id="_IDGenTitle"
-				text="{i18n>worklistTitle}"
-				level="H2"/>
-		</semantic:titleHeading>
-
-		<semantic:content>
-
-			<IconTabBar id="idIconTabBarFiori2" upperCase="true" expanded="{device>/isNoPhone}"
-				selectedKey="key1"
-				class="sapUiResponsiveContentPadding">
-				<items>
-					<IconTabFilter id="_IDGenIconTabFilter1" text="Clientes" key="key1">
-					<content>    
-			
-						<Table
-							id="table"
-							width="auto"
-							mode="MultiSelect"
-							delete="onClienteDelete"
-							items="{
-								path: '/MaterialSet',
-								sorter: [
-									{
-										path: 'Bukrs',
-										descending: true
-									},
-									{
-										path: 'Matnr',
-										descending: false
-									}
-								],
-								filters: [{
-								path: 'Menge',
-								operator: 'GT',
-								value1: '10.000'
-								},{
-								path: 'Meins',
-								operator: 'NE',
-								value1: 'UN'
+					<Table
+						id="table"
+						width="auto"
+						mode="MultiSelect"
+						delete="onClienteDelete"
+						items="{
+							path: '/MaterialSet',
+							sorter: [
+								{
+									path: 'Bukrs',
+									descending: true
+								},
+								{
+									path: 'Matnr',
+									descending: false
 								}
-								]
-							}"
-							noDataText="{worklistView>/tableNoDataText}"
-							busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-							growing="true"
-							growingScrollToLoad="false"
-							growingThreshold="20"
-							updateFinished=".onUpdateFinished">
+							],
+							filters: [{
+							path: 'Menge',
+							operator: 'GT',
+							value1: '10.000'
+							},{
+							path: 'Meins',
+							operator: 'NE',
+							value1: 'UN'
+							}
+							]
+						}"
+						noDataText="{worklistView>/tableNoDataText}"
+						busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+						growing="true"
+						growingScrollToLoad="false"
+						growingThreshold="20"
+						updateFinished=".onUpdateFinished">
 
-							<headerToolbar>
-								<OverflowToolbar id="_IDGenOverflowToolbar">
-									<Title
-										id="tableHeader"
-										text="Lista de Materiais"
-										level="H3"/>
+						<headerToolbar>
+							<OverflowToolbar id="_IDGenOverflowToolbar">
+								<Title
+									id="tableHeader"
+									text="Lista de Materiais"
+									level="H3"/>
 
-									<ToolbarSpacer id="_IDGenToolbarSpacer" />
-									<core:ExtensionPoint name="ExtClienteTabPanel"/>
-                  					<Button id="_IDGenButton4" text="[Ordenar]"  press="onSortItems" />
-									<Button id="_IDGenButton" text="[Ler MATNR da linha marcada no Backend]"  press="onClienteReadSelected" />
-                  					<Button id="_IDGenButton5" text="[Ler Todos c/ Bind Aggregation]"  press="onClienteReadAllBindAggregation" />
-									<Button id="_IDGenButton1" icon="sap-icon://delete" press="onClienteDelete" />
-									<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarClientePress" />
-									<Button id="_IDGenButton9" text="Deletar" type="Emphasized" press="onDeletarClientePress" />
-									<SearchField
-										id="searchField"
-										tooltip="{i18n>worklistSearchTooltip}"
-										search="onSearchCustom">
-										<layoutData>
-											<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData"
-												maxWidth="200px"
-												priority="NeverOverflow"/>
-										</layoutData>
-									</SearchField>
-								</OverflowToolbar>
-							</headerToolbar>
-							<columns>
-								<Column id="_IDGenColumn">
-									<Text id="_IDGenText" text="Empresa" />
-								</Column>
-								<Column id="_IDGenColumn1">
-									<Text id="_IDGenText1" text="Material" />
-								</Column>
-								<Column id="_IDGenColumn2" hAlign="End">
-									<Text id="_IDGenText2" text="Descrição" />
-								</Column>
-								<Column id="_IDGenColumn3" hAlign="End">
-									<Text id="_IDGenText3" text="Quantidade" />
-								</Column>
-								<Column id="_IDGenColumn4" hAlign="End">
-									<Text id="_IDGenText4" text="UM" />
-								</Column>
-							</columns>
+								<ToolbarSpacer id="_IDGenToolbarSpacer" />
+								<core:ExtensionPoint name="ExtClienteTabPanel"/>
+								<Button id="_IDGenButton4" text="[Ordenar]"  press="onSortItems" />
+								<Button id="_IDGenButton" text="[Ler MATNR da linha marcada no Backend]"  press="onClienteReadSelected" />
+								<Button id="_IDGenButton5" text="[Ler Todos c/ Bind Aggregation]"  press="onClienteReadAllBindAggregation" />
+								<Button id="_IDGenButton1" icon="sap-icon://delete" press="onClienteDelete" />
+								<Button id="_IDGenButton2" text="Criar" type="Emphasized" press="onCriarClientePress" />
+								<Button id="_IDGenButton9" text="Deletar" type="Emphasized" press="onDeletarClientePress" />
+								<SearchField
+									id="searchField"
+									tooltip="{i18n>worklistSearchTooltip}"
+									search="onSearchCustom">
+									<layoutData>
+										<OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData"
+											maxWidth="200px"
+											priority="NeverOverflow"/>
+									</layoutData>
+								</SearchField>
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column id="_IDGenColumn">
+								<Text id="_IDGenText" text="Empresa" />
+							</Column>
+							<Column id="_IDGenColumn1">
+								<Text id="_IDGenText1" text="Material" />
+							</Column>
+							<Column id="_IDGenColumn2" hAlign="End">
+								<Text id="_IDGenText2" text="Descrição" />
+							</Column>
+							<Column id="_IDGenColumn3" hAlign="End">
+								<Text id="_IDGenText3" text="Quantidade" />
+							</Column>
+							<Column id="_IDGenColumn4" hAlign="End">
+								<Text id="_IDGenText4" text="UM" />
+							</Column>
+						</columns>
 
-							<items>
-								<ColumnListItem id="_IDGenColumnListItem"
-									type="Navigation"
-									press=".onLinePress">
-									<cells>
-										<ObjectIdentifier id="_IDGenObjectIdentifier"
-											title="{
-												path: 'Bukrs',
-												formatter: '.formatter.idText'
-												}"/>
-										<ObjectIdentifier id="_IDGenObjectIdentifier1"
-											title="{
-												path: 'Matnr',
-												formatter: '.formatter.idText'
-												}"/>
-											<ObjectAttribute id="_IDGenObjectAttribute"
-											text="{Maktx}"/>
+						<items>
+							<ColumnListItem id="_IDGenColumnListItem"
+								type="Navigation"
+								press=".onLinePress">
+								<cells>
+									<ObjectIdentifier id="_IDGenObjectIdentifier"
+										title="{
+											path: 'Bukrs',
+											formatter: '.formatter.idText'
+											}"/>
+									<ObjectIdentifier id="_IDGenObjectIdentifier1"
+										title="{
+											path: 'Matnr',
+											formatter: '.formatter.idText'
+											}"/>
+										<ObjectAttribute id="_IDGenObjectAttribute"
+										text="{Maktx}"/>
 
-											<ObjectStatus id="_IDGenObjectStatus"
-											text="{Menge}"/>
-											
-											<ObjectStatus id="_IDGenObjectStatus1"
-											text="{Meins}"/>
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table>
-					</content>
-					</IconTabFilter>
+										<ObjectStatus id="_IDGenObjectStatus"
+										text="{Menge}"/>
+										
+										<ObjectStatus id="_IDGenObjectStatus1"
+										text="{Meins}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				</IconTabFilter>
 
-					<core:ExtensionPoint name="ExtWorklistTab"/>
+				<core:ExtensionPoint name="ExtWorklistTab"/>
 
-				</items>
+			</items>
 		</IconTabBar>
 
-		</semantic:content>
-
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-		<semantic:footerCustomActions>
-			<Button id="_IDGenButton3" 
-			icon="sap-icon://alert"
-			text="{= ${messagez>/}.length }"
-			visible="{= ${messagez>/}.length > 0 }"
-			type="Emphasized"
-			press="onMessagePopoverPress"
-			></Button>
-		</semantic:footerCustomActions>
-
-	</semantic:SemanticPage>
+		</f:content>
+	</f:DynamicPage>
+	
 </mvc:View>

@@ -31,18 +31,42 @@ sap.ui.define([
             },
             
             onSearchCustom: function(oEvent){
-                let aTableSearchState = [];
-                let sQuery = oEvent.getParameter('query');
+                
+                // 1. Obter referências dos campos de input pelo ID definido no XML
+                let sBukrs = this.byId("inputBukrs").getValue();
+                let sMatnr = this.byId("inputMatnr").getValue();
 
-                if (sQuery && sQuery.length > 0) {
-                    aTableSearchState = [
-                        new Filter('Matnr', FilterOperator.Contains, sQuery)
-                    ];
+                let aFilters = [];
 
-                    let oTable = this.byId('table');
-                    let oItems = oTable.getBinding('items');
-                    oItems.filter(aTableSearchState);
+                // 2. Validar e criar o filtro para Empresa (Bukrs)
+                if (sBukrs && sBukrs.length > 0) {
+                    aFilters.push(new Filter("Bukrs", FilterOperator.Contains, sBukrs));
                 }
+
+                // 3. Validar e criar o filtro para Material (Matnr)
+                if (sMatnr && sMatnr.length > 0) {
+                    aFilters.push(new Filter("Matnr", FilterOperator.Contains, sMatnr));
+                }
+
+                // 4. Aplicar os filtros na tabela
+                let oTable = this.byId("table");
+                let oBinding = oTable.getBinding("items");
+
+                // 5. Se aFilters estiver vazio, ele limpará os filtros e mostrará tudo
+                oBinding.filter(aFilters);
+
+                // let aTableSearchState = [];
+                // let sQuery = oEvent.getParameter('query');
+
+                // if (sQuery && sQuery.length > 0) {
+                //     aTableSearchState = [
+                //         new Filter('Matnr', FilterOperator.Contains, sQuery)
+                //     ];
+
+                //     let oTable = this.byId('table');
+                //     let oItems = oTable.getBinding('items');
+                //     oItems.filter(aTableSearchState);
+                // }
 
             },
             /* ------------------------------------------------------- */
